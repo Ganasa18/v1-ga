@@ -1,0 +1,15 @@
+name: publish
+
+on: [push]
+
+jobs:
+  publish-ga-image:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the hello-world Docker image
+      run: |
+        echo $CR_PAT | docker login ghcr.io -u ganasa18 --password-stdin
+      env:
+        CR_PAT: ${{ secrets.CR_PAT }}
